@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -31,7 +33,38 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     '@nuxtjs/bulma',
+    '@nuxtjs/axios',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/auth'
   ],
+
+  axios: {
+    baseURL: process.env.API_AUTH_URL
+  },
+
+  /*
+ ** Auth module configuration
+ ** See https://auth.nuxtjs.org/schemes/local.html#options
+ */
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: 'auth/local',
+            method: 'post',
+            propertyName: 'jwt'
+          },
+          user: {
+            url: 'users/me',
+            method: 'get',
+            propertyName: false
+          },
+          logout: false
+        }
+      }
+    }
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
