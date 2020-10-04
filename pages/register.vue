@@ -62,37 +62,37 @@
 </template>
 
 <script>
-import Notification from "~/components/Notification";
+import Notification from '~/components/Notification'
 
 export default {
   components: {
-    Notification,
+    Notification
   },
   data() {
     return {
-      username: "",
-      email: "",
-      password: "",
+      username: '',
+      email: '',
+      password: '',
       success: null,
-      error: null,
-    };
+      error: null
+    }
   },
   methods: {
     async register() {
-      this.error = null;
+      this.error = null
       try {
-        this.$axios.setToken(false);
-        await this.$axios.post("auth/local/register", {
+        this.$axios.setToken(false)
+        await this.$axios.post('auth/local/register', {
           username: this.username,
           email: this.email,
-          password: this.password,
-        });
+          password: this.password
+        })
         this.success = `A confirmation link has been sent to your email account. \
-        Please click on the link to complete the registration process.`;
+        Please click on the link to complete the registration process.`
       } catch (e) {
-        this.error = e.response.data.message[0].messages[0].message;
+        this.error = e.response.data.message[0].messages[0].message
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
